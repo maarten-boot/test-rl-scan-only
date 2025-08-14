@@ -1,0 +1,52 @@
+name: Example rl-secure workflow
+run-name: rl-scanner-only
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  checkout-build-scan-only:
+    runs-on: ubuntu-latest
+
+    permissions:
+      statuses: write
+      pull-requests: write
+
+    steps:
+      # Need to check out data before we can do anything
+      - uses: actions/checkout@v4
+
+      # Replace this with your build process
+      # Need to produce one file as the build artifact in scanfile=<relative file path>
+      - name: Create build artifact
+        id: build
+
+        shell: bash
+
+        run: |
+          echo "scanfile=$( ls Readme.md )" >> $GITHUB_OUTPUT
+
+      # Use the rl-scanner-only action
+      - name: Scan build artifact
+        id: rl-scan
+
+        env:
+          RLSECURE_ENCODED_LICENSE: ${{ secrets.RLSECURE_ENCODED_LICENSE }}
+          RLSECURE_SITE_KEY: ${{ secrets.RLSECURE_SITE_KEY }}
+
+        uses: maarten-boot/gh-action-rl-scanner-only-test@t1.0.1
+
+        with:
+          artifact-to-scan: ${{ steps.build.outputs.scanfile }}
+          report-path: "My_Report_Dir"
+
+      # The report needs to be displayed even if the scan fails, so we're using a conditional expression to specify that
+      - name: Show analysis report
+        if: success() || failure()
+        shell: bash
+        run: |
+          ls -la
+          ls -l 'My_Report_Dir'
