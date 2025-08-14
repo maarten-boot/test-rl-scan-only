@@ -49,4 +49,4 @@ jobs:
         shell: bash
         run: |
           ls -la
-          ls -l 'My_Report_Dir'
+          ls -laR 'My_Report_Dir'
