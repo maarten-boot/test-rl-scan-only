@@ -39,9 +39,9 @@
             with:
               artifact-to-scan: ${{ steps.build.outputs.scanfile }}
               rl-verbose: true
-              rl-portal-server: demo
-              rl-portal-org: ExampleOrg
-              rl-portal-group: demo-group
+              rl-portal-server: test
+              rl-portal-org: Test
+              rl-portal-group: Default
               rl-package-url: my-project/my-package@t1.0.1
 
           - name: report the scan status
