@@ -16,7 +16,8 @@ jobs:
       pull-requests: write
       repository-projects: write
       statuses: write
-    
+      security-events: write
+  
     steps:
       # Need to check out data before we can do anything
       - uses: actions/checkout@v4
