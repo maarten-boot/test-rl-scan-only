@@ -10,15 +10,13 @@ on:
 jobs:
   checkout-build-scan-only:
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
       pull-requests: write
       repository-projects: write
-
-    permissions:
       statuses: write
-      pull-requests: write
-
+    
     steps:
       # Need to check out data before we can do anything
       - uses: actions/checkout@v4
