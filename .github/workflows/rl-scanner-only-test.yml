@@ -38,7 +38,8 @@ jobs:
           RLSECURE_SITE_KEY: ${{ secrets.RLSECURE_SITE_KEY }}
 
         # uses: maarten-boot/gh-action-rl-scanner-only-test@t1.0.1
-        uses: reversinglabs/gh-action-rl-scanner-only@v1
+        # uses: reversinglabs/gh-action-rl-scanner-only@v1
+        uses: reversinglabs/gh-action-rl-scanner-composite@v1
 
         with:
           artifact-to-scan: ${{ steps.build.outputs.scanfile }}
