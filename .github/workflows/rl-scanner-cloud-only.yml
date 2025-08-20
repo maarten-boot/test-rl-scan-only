@@ -13,6 +13,7 @@
         permissions:
           statuses: write
           pull-requests: write
+          security-events: write
 
         steps:
           # Need to check out data before we can do anything
